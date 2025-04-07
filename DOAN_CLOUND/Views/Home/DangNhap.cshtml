@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_LayoutPage1_User.cshtml";
+}
+
+<style>
+    .form-control {
+        border: 2px solid white !important;
+        border-radius: 8px;
+        max-width: 500px;
+        padding-left: 20px;
+    }
+
+    table {
+        max-width: 800px !important;
+        color: white;
+        font-size: 20px;
+    }
+
+    td {
+        margin-bottom: 0;
+    }
+
+    #dangnhap-button {
+        width: 300px;
+        height: 50px;
+    }
+</style>
+
+
+<h1 class="text-center mt-4">ĐĂNG NHẬP TÀI KHOẢN</h1>
+<div class="container-fluid d-flex justify-content-center">
+    <table class="table">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <tr>
+                <td style="text-align:right;">Tên Đăng nhập: </td>
+                <td>@*@Html.TextBox("TenDN")*@<input type="text" name="TenDN" class="form-control" /> @ViewData["Loi1"] </td>
+            </tr>
+            <tr>
+                <td style="text-align:right;">Mật Khẩu: </td>
+                <td>@*@Html.Password("Matkhau")*@ <input type="password" name="Matkhau" class="form-control" />@ViewData["Loi2"]</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="ĐĂNG NHẬP" class="btn btn-primary" id="dangnhap-button" /></td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>
+<h5 style="color:red; text-align:center;">@ViewBag.TB</h5>
+
+
+
+

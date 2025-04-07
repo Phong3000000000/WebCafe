@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Create_Category";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model DOAN_CLOUND.Models.CATEGORy
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateDept</title>
+    <!--Bootstrap 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("Create_Category", "Category", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)   
+        <h3 class="mt-3" style="color: blue; font-weight: bold">ADD NEW CATEGORY</h3>
+
+        <div class="editor-label">
+            <p>Add category name</p>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NAME)
+            @Html.ValidationMessageFor(model => model.NAME)
+        </div>
+
+        <p class="form-group" style="margin-top: 20px">
+            <input type="submit" class="btn btn-primary" value="Create" />
+        </p>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index_Category", "Home")
+        </div>
+    }
+</body>
+</html>
+
+

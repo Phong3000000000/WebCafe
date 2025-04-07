@@ -1,0 +1,112 @@
+﻿@model IEnumerable<DOAN_CLOUND.Models.USER>
+
+@{
+    ViewBag.Title = "Index_User";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<style>
+    .table-wrapper {
+        overflow-x: auto;
+    }
+</style>
+
+<h2>Index_User</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create_User", "User")
+</p>
+
+<div class="table-wrapper">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HOTEN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CHUCVU)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MANV_QUANLY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NGAYSINH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GIOITINH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CMND)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ROLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DIACHI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SODT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USERNAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PASSWORD)
+            </th>
+            <th>TINHNANG</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HOTEN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CHUCVU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MANV_QUANLY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NGAYSINH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GIOITINH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CMND)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROLE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIACHI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SODT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERNAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PASSWORD)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "Update_User", "User", new { id = item.ID }, null) |
+                    @Html.ActionLink("Delete", "Delete_User", "User", new { id = item.ID }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+

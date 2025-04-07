@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DOAN_CLOUND.Models.ORDER>
+
+@{
+    ViewBag.Title = "Index_Order";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Index_Order</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create_Order", "Order")
+</p>    
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MAHOADON)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MAKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAYLAP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TONGGIA)
+        </th>
+        <th>TINHNANG</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAHOADON)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAKH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAYLAP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TONGGIA)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Update_Order", "Order", new { mahoadon = item.MAHOADON }, null) |
+            @Html.ActionLink("Details", "Index_Order_Details_Id", "Home", new { mahd = item.MAHOADON }, null) |
+            @Html.ActionLink("Delete", "Delete_Order", "Order", new { mahoadon = item.MAHOADON }, null)
+        </td>
+    </tr>
+}
+
+</table>

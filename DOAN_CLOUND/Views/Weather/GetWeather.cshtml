@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "GetWeather";
+    Layout = "~/Views/Shared/_LayoutPage1_User.cshtml";
+}
+
+@model dynamic
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin thời tiết</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffd800;
+            margin-bottom: 20px;
+            font-size: 50px;
+        }
+
+        .weather-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .weather-card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+            .weather-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .time {
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .temperature {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .precipitation {
+            font-size: 1.2em;
+            color: #3498db;
+        }
+
+        .ngay {
+            color: #10375C;
+            font-weight: bold;
+        }
+
+        .gio {
+            color: #EB8317;
+            font-weight: bold;
+        }
+
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .background {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .background-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Thông tin thời tiết theo giờ</h2>
+    @{
+        int temp = 0;
+    }
+    @if (Model != null)
+    {
+        for (int i = 0; i < Model.hourly.time.Count; i++)
+        {
+            string datetimeStr_out = Model.hourly.time[i];
+
+            // Chuyển đổi chuỗi thành đối tượng DateTime
+            DateTime datetimeObj_out = DateTime.Parse(datetimeStr_out);
+
+            // Lấy ngày, tháng, năm
+            int year_out = datetimeObj_out.Year;
+            int month_out = datetimeObj_out.Month;
+            int day_out = datetimeObj_out.Day;
+
+            if (day_out != temp)
+            {
+                temp = day_out;
+
+                <div class="weather-container">
+                    <h3>Ngày: @day_out/@month_out/@year_out</h3>
+                </div>
+
+                <div class="weather-container">
+
+
+                    @for (int j = 0; j < Model.hourly.time.Count; j++)
+                    {
+                        string datetimeStr = Model.hourly.time[j];
+
+                        // Chuyển đổi chuỗi thành đối tượng DateTime
+                        DateTime datetimeObj = DateTime.Parse(datetimeStr);
+
+                        // Lấy ngày, tháng, năm
+                        int year = datetimeObj.Year;
+                        int month = datetimeObj.Month;
+                        int day = datetimeObj.Day;
+
+
+
+                        // Lấy giờ
+                        int hour = datetimeObj.Hour;
+                        int minute = datetimeObj.Minute;
+
+                        string hour_str = "";
+                        string minute_str = "";
+
+                        minute_str = minute.ToString() + '0';
+
+
+                        if (hour < 10)
+                        {
+                            hour_str = '0' + hour.ToString();
+                        }
+                        else
+                        {
+                            hour_str = hour.ToString();
+                        }
+
+
+                        if (day == day_out)
+                        {
+                            if (@Model.hourly.precipitation_probability[j] >= 50)
+                            {
+                                <div class="weather-card background" style="border: 4px solid #01CDD4; background-image: url('/images/Screenshot 2024-12-07 164321.png');">
+                                    <div class="background-blur" style="backdrop-filter: blur(5px)"></div>
+                                    <div class="card-content">
+                                        @*<div class="time">@Model.hourly.time[i]</div>*@
+                                        <div class="time ngay" style="color: #ffffff">Ngày: @day/@month/@year</div>
+                                        <div class="time gio">Giờ: @hour_str:@minute_str</div>
+                                        @if (@Model.hourly.temperature_2m[j] >= 30)
+                                        {
+                                            <div class="temperature" style="color: #e74c3c;">@Model.hourly.temperature_2m[j]°C</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="temperature" style="color: #80FF4D;">@Model.hourly.temperature_2m[j]°C</div>
+                                        }
+                                        <div class="precipitation">Mưa: @Model.hourly.precipitation_probability[j]%</div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="weather-card">
+                                    @*<div class="time">@Model.hourly.time[i]</div>*@
+                                    <div class="time ngay">Ngày: @day/@month/@year</div>
+                                    <div class="time gio">Giờ: @hour_str:@minute_str</div>
+                                    @if (@Model.hourly.temperature_2m[j] >= 27)
+                                    {
+                                        <div class="temperature" style="color: #e74c3c;">@Model.hourly.temperature_2m[j]°C</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="temperature" style="color: #80FF4D;">@Model.hourly.temperature_2m[j]°C</div>
+                                    }
+                                    <div class="precipitation">Mưa: @Model.hourly.precipitation_probability[j]%</div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <p>Không có dữ liệu thời tiết.</p>
+    }
+</body>
+</html>
+

@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Đăng Ký Thành Viên";
+    Layout = "~/Views/Shared/_LayoutPage1_User.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Thành Viên</title>
+    <!-- Bootstrap CSS -->
+    <style>
+        /* Cấu hình chung cho form input */
+        .form-input {
+            border: 1px solid black; /* Đường viền mặc định */
+            border-radius: 4px; /* Độ cong góc */
+            padding: 10px 15px; /* Khoảng đệm */
+            font-size: 16px; /* Kích thước chữ */
+            color: #495057; /* Màu chữ */
+            background-color: #f8f9fa; /* Màu nền */
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            max-width: 400px;
+        }
+
+            /* Khi người dùng hover vào form input */
+            .form-input:hover {
+                border-color: #80bdff;
+                background-color: #f1f3f5;
+            }
+
+            /* Khi form input được focus */
+            .form-input:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+                outline: none;
+            }
+
+            /* Khi form input ở trạng thái disabled */
+            .form-input:disabled, .form-input[readonly] {
+                background-color: #e9ecef;
+                opacity: 1;
+            }
+
+        /* Select dropdown */
+        .form-input-select {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            color: #495057;
+            padding: 8px 15px;
+            border-radius: 4px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+            .form-input-select:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+            }
+
+        /* Table cell configuration */
+        .table tbody tr td {
+            padding: 0;
+            max-width: 400px;
+            color: white;
+        }
+
+        /* Căn giữa form trong màn hình */
+        form {
+            width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Căn chỉnh các trường nhập liệu */
+        .form-input {
+            width: 100%;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Định dạng nút Đăng ký */
+        button[type="submit"] {
+            background-color: #a67c52;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #8c5f35;
+            }
+
+            td {
+                max-width: 400px;
+                color: white;
+                text-align: center;
+            }
+
+            table {
+                width: 600px;
+            }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid mt-5">
+        <h2 class="text-center mb-4">ĐĂNG KÝ THÀNH VIÊN</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8 p-3" style=" display:flex; justify-content:center;">
+                <table>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <tr>
+                            <td class="text-end fw-bold">Họ Tên KH:</td>
+                            <td>@Html.TextBox("HotenKH", "", new { @class = "form-input" }) @ViewData["Loi1"]</td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Tên Đăng nhập:</td>
+                            <td>@Html.TextBox("TenDN", "", new { @class = "form-input" }) @ViewData["Loi2"]</td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Mật Khẩu:</td>
+                            <td>@Html.Password("Matkhau", "", new { @class = "form-input" }) @ViewData["Loi3"]</td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Nhập lại Mật khẩu:</td>
+                            <td>@Html.Password("ReMatkhau", "", new { @class = "form-input" }) @ViewData["Loi4"]</td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Điện thoại:</td>
+                            <td>@Html.TextBox("Dienthoai", "", new { @class = "form-input" }) @ViewData["Loi5"]</td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Ngày sinh:</td>
+                            <td><input type="date" name="NgaySinh" class="form-input" /></td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Email:</td>
+                            <td><input type="text" name="Email" class="form-input" /></td>
+                        </tr>
+                        <tr>
+                            <td class="text-end fw-bold">Địa Chỉ:</td>
+                            <td><input type="text" name="Diachi" class="form-input" /></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                <button type="submit" class="btn btn-primary btn-sm">ĐĂNG KÝ</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

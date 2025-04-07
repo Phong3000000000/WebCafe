@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index_BILL";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using DOAN_CLOUND.Models
+@model IEnumerable<DOAN_CLOUND.Models.Bill>
+
+<h2>Danh sách hóa đơn</h2>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="white-space:nowrap">Mã hóa đơn</th>
+                        <th style="white-space:nowrap">Ngày lập</th>
+                        <th style="white-space:nowrap">Trạng thái</th>
+                        <th style="white-space:nowrap">Mã khách hàng</th>
+                        <th style="white-space:nowrap">Mã nhân viên</th>
+                        <th style="white-space:nowrap">Chi tiết hóa đơn</th>
+                        <th style="white-space:nowrap">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var bill in Model)
+                        {
+                            <tr>
+                                <td style="white-space:nowrap">@bill.MAHD</td>
+                                <td style="white-space:nowrap">@bill.NGAYLAP</td>
+                                <td style="white-space:nowrap">@bill.TRANGTHAI</td>
+                                <td style="white-space:nowrap">@bill.MAKH</td>
+                                <td style="white-space:nowrap">@bill.MANV</td>
+                                <td>
+                                    <ul>
+                                        @if (bill.BillDetails != null && bill.BillDetails.Any())
+                                        {
+                                            foreach (var detail in bill.BillDetails)
+                                            {
+                                                <li style="white-space:nowrap">
+                                                    Mã hàng: @detail.MAHG<br />
+                                                    Số lượng: @detail.SOLUONG<br />
+                                                    Giá bán: @detail.GIABAN
+
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li>Không có chi tiết hóa đơn.</li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td style="white-space:nowrap">
+                                    @Html.ActionLink("Update", "Edit_Bill", new { id = bill.Id }) |
+                                    @Html.ActionLink("Delete", "Delete_Bill", new { id = bill.Id }, new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">Không có hóa đơn nào được tìm thấy.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div>
+                @Html.ActionLink("Create new", "Create_BILL", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>

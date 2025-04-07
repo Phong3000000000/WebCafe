@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Delete_Bill";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model DOAN_CLOUND.Models.Bill
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="form-horizontal" style="width:50%; margin:20px auto; padding:10px; box-shadow:1px 1px 2px 2px #888888; border-radius:10px">
+                <h4 class="text-danger">Bạn có chắc chắn muốn xóa hóa đơn này?</h4>
+                <hr />
+
+                <!-- Hiển thị thông tin hóa đơn -->
+                <dl class="row">
+                    <dt class="col-sm-6">Mã hóa đơn</dt>
+                    <dd class="col-sm-6">@Model.MAHD</dd>
+
+                    <dt class="col-sm-6">Ngày lập</dt>
+                    <dd class="col-sm-6">@Model.NGAYLAP</dd>
+
+                    <dt class="col-sm-6">Trạng thái</dt>
+                    <dd class="col-sm-6">@Model.TRANGTHAI</dd>
+
+                    <dt class="col-sm-6">Mã khách hàng</dt>
+                    <dd class="col-sm-6">@Model.MAKH</dd>
+
+                    <dt class="col-sm-6">Mã nhân viên lập</dt>
+                    <dd class="col-sm-6">@Model.MANV</dd>
+                </dl>
+
+                <hr />
+
+                <!-- Hiển thị danh sách chi tiết hóa đơn -->
+                <h5>Chi tiết hóa đơn</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã hàng</th>
+                            <th>Số lượng</th>
+                            <th>Giá bán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.BillDetails)
+                        {
+                            <tr>
+                                <td>@item.MAHG</td>
+                                <td>@item.SOLUONG</td>
+                                <td>@item.GIABAN</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @using (Html.BeginForm("DeleteConfirmed_BILL", "Home", new { id = Model.Id }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions">
+                        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                        @Html.ActionLink("Hủy bỏ", "Index_BILL", null, new { @class = "btn btn-secondary" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

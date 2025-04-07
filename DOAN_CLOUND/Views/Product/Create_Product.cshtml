@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Create_Product";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model DOAN_CLOUND.Models.PRODUCT
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateDept</title>
+    <!--Bootstrap 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("Create_Product", "Product", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+
+    <div class="container mt-5">
+        <h2 class="text-primary text-center mb-4">Add New Product</h2>
+        <div class="card shadow">
+            <div class="card-body">
+                <form>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    <p>Enter product's name</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.TENHANG)
+                                    @Html.ValidationMessageFor(model => model.TENHANG)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    <p>Enter DVT</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.DVT)
+                                    @Html.ValidationMessageFor(model => model.DVT)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    <p>Enter CATE_ID</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.CATE_ID)
+                                    @Html.ValidationMessageFor(model => model.CATE_ID)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    <p>Enter image</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input type="file" name="HINHANH" id="HINHANH" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.HINHANH)
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    <p>Enter product price</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.GIA)
+                                    @Html.ValidationMessageFor(model => model.GIA)
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <div class="text-right">
+                        <p class="form-group" style="margin-top: 20px">
+                            <input type="submit" class="btn btn-primary" value="Create" />
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        @Html.ActionLink("Back to List", "Index_Products", "Home")
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    }
+</body>
+</html>
+
+
+
+

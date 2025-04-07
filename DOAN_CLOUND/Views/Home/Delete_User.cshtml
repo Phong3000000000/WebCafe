@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Delete_User";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@model DOAN_CLOUND.Models.KhachHang
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="form-horizontal" style="width:30%; margin:20px auto; padding:10px; box-shadow:1px 1px 2px 2px #888888; border-radius:10px">
+                <h4>Bạn có chắc chắn muốn xóa khách hàng này?</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-6">Họ tên</dt>
+                    <dd class="col-sm-6">@Model.HOTEN</dd>
+
+                    <dt class="col-sm-6">Chức vụ</dt>
+                    <dd class="col-sm-6">@Model.CHUCVU</dd>
+
+                    <dt class="col-sm-6">Mã người quản lý</dt>
+                    <dd class="col-sm-6">@Model.MANV_QUANLY</dd>
+
+                    <dt class="col-sm-6">Ngày sinh</dt>
+                    <dd class="col-sm-6">@Model.NGAYSINH</dd>
+
+                    <dt class="col-sm-6">Giới tính</dt>
+                    <dd class="col-sm-6">@Model.GIOITINH</dd>
+
+                    <dt class="col-sm-6">CMND</dt>
+                    <dd class="col-sm-6">@Model.CMND</dd>
+
+                    <dt class="col-sm-6">Email</dt>
+                    <dd class="col-sm-6">@Model.EMAIL</dd>
+
+                    <dt class="col-sm-6">Role</dt>
+                    <dd class="col-sm-6">@Model.ROLE</dd>
+
+                    <dt class="col-sm-6">Adress</dt>
+                    <dd class="col-sm-6">@Model.DIACHI</dd>
+
+                    <dt class="col-sm-6">Phone</dt>
+                    <dd class="col-sm-6">@Model.SODT</dd>
+                </dl>
+
+                @*<form asp-action="Delete1" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <input type="submit" value="Xóa" class="btn btn-danger" />
+                            <a asp-action="Index_Category" href="~/Home/Index_Category" class="btn btn-secondary">Hủy bỏ</a>
+                        </div>
+                    </form>*@
+                @using (Html.BeginForm("Delete", "Home", new { id = Model.Id }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default" /> |
+                        @Html.ActionLink("Back to List", "Index_User")
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+

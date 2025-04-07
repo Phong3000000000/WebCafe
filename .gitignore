@@ -1,0 +1,16 @@
+# Bỏ qua thư mục Visual Studio
+.vs/
+
+# Bỏ qua các thư mục tạm và thư mục kết quả biên dịch
+bin/
+obj/
+
+# Bỏ qua các tệp của người dùng Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Bỏ qua các tệp tạm
+*.log
+*.tmp

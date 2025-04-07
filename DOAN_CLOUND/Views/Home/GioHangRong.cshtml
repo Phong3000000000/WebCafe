@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "menu";
+    Layout = "~/Views/Shared/_LayoutPage1_User.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GioHangRong</title>
+    <style>
+        h1 {
+            font-size: 70px;
+        }
+
+        a{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="">
+        <h1 class="text-danger text-center mt-3">Giỏ Hàng Rỗng</h1>
+        <h2 class="text-white text-center">Xin Vui Lòng Order Món Giúp Chúng Tớ Nhé!!!</h2>
+        <p class="text-center"><a class="text-center text-warning" href="@Url.Action("menu", "Home")">Go to Menu</a></p>
+    </div>
+</body>
+</html>

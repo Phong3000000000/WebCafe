@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "Edit_BILL";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model DOAN_CLOUND.Models.Bill
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="form-horizontal" style="width:55%; margin:20px auto; padding:10px; box-shadow:1px 1px 2px 2px #888888; border-radius:10px">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>Bill</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MAHD, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MAHD, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MAHD, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NGAYLAP, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NGAYLAP, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NGAYLAP, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TRANGTHAI, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TRANGTHAI, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TRANGTHAI, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MAKH, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MAKH, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MAKH, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MANV, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MANV, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MANV, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Phần thêm BillDetails -->
+                        <h4>Bill Details</h4>
+                        <div class="table-responsive">
+                            <table class="table" id="billDetailsTable">
+                                <thead>
+                                    <tr>
+                                        <th style="white-space:nowrap">Mã Hàng</th>
+                                        <th style="white-space:nowrap">Số Lượng</th>
+                                        <th style="white-space:nowrap">Giá Bán</th>
+                                        <th style="white-space:nowrap">Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.BillDetails != null && Model.BillDetails.Count > 0)
+                                    {
+                                        for (int i = 0; i < Model.BillDetails.Count; i++)
+                                        {
+                                            <tr class="bill-detail-row">
+                                                <td>
+                                                    @Html.EditorFor(m => m.BillDetails[i].MAHG, new { htmlAttributes = new { @class = "form-control product-id" } })
+                                                    @Html.ValidationMessageFor(m => m.BillDetails[i].MAHG, "", new { @class = "text-danger" })
+                                                </td>
+                                                <td>
+                                                    @Html.EditorFor(m => m.BillDetails[i].SOLUONG, new { htmlAttributes = new { @class = "form-control quantity" } })
+                                                    @Html.ValidationMessageFor(m => m.BillDetails[i].SOLUONG, "", new { @class = "text-danger" })
+                                                </td>
+                                                <td>
+                                                    @Html.EditorFor(m => m.BillDetails[i].GIABAN, new { htmlAttributes = new { @class = "form-control unit-price" } })
+                                                    @Html.ValidationMessageFor(m => m.BillDetails[i].GIABAN, "", new { @class = "text-danger" })
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" onclick="removeRow(this)">Xóa</button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" onclick="addNewRow()">Thêm sản phẩm</button>
+                        </div>
+
+                        <script>
+                            function addNewRow() {
+                                const table = document.querySelector("#billDetailsTable tbody");
+                                const rowCount = table.getElementsByClassName("bill-detail-row").length;
+
+                                const newRow = document.createElement("tr");
+                                newRow.className = "bill-detail-row";
+
+                                newRow.innerHTML = `
+                                                             <td>
+                                                                 <input type="text" name="BillDetails[${rowCount}].ProductId" class="form-control product-id" />
+                                                                 <span class="text-danger field-validation-valid" data-valmsg-for="BillDetails[${rowCount}].ProductId" data-valmsg-replace="true"></span>
+                                                             </td>
+                                                             <td>
+                                                                 <input type="number" name="BillDetails[${rowCount}].Quantity" class="form-control quantity" />
+                                                                 <span class="text-danger field-validation-valid" data-valmsg-for="BillDetails[${rowCount}].Quantity" data-valmsg-replace="true"></span>
+                                                             </td>
+                                                             <td>
+                                                                 <input type="number" name="BillDetails[${rowCount}].UnitPrice" class="form-control unit-price" />
+                                                                 <span class="text-danger field-validation-valid" data-valmsg-for="BillDetails[${rowCount}].UnitPrice" data-valmsg-replace="true"></span>
+                                                             </td>
+                                                             <td>
+                                                                 <button type="button" class="btn btn-danger" onclick="removeRow(this)">Xóa</button>
+                                                             </td>
+                                                         `;
+
+                                table.appendChild(newRow);
+
+                                // Reinitialize validation for new elements
+                                if (typeof $.validator !== 'undefined') {
+                                    $("form").data("validator").settings.ignore = "";
+                                    $("form").validate().element("input[name='BillDetails[" + rowCount + "].ProductId']");
+                                    $("form").validate().element("input[name='BillDetails[" + rowCount + "].Quantity']");
+                                    $("form").validate().element("input[name='BillDetails[" + rowCount + "].UnitPrice']");
+                                }
+                            }
+
+                            function removeRow(button) {
+                                const row = button.closest("tr");
+                                if (row.parentNode.getElementsByClassName("bill-detail-row").length > 1) {
+                                    row.remove();
+                                    reindexRows();
+                                } else {
+                                    alert("Phải có ít nhất một sản phẩm trong hóa đơn!");
+                                }
+                            }
+
+                            function reindexRows() {
+                                const rows = document.getElementsByClassName("bill-detail-row");
+                                for (let i = 0; i < rows.length; i++) {
+                                    const inputs = rows[i].getElementsByTagName("input");
+                                    const spans = rows[i].getElementsByClassName("text-danger");
+
+                                    for (let input of inputs) {
+                                        const fieldName = input.name.split('.')[1];
+                                        input.name = `BillDetails[${i}].${fieldName}`;
+                                    }
+
+                                    for (let span of spans) {
+                                        const fieldName = span.getAttribute("data-valmsg-for").split('.')[1];
+                                        span.setAttribute("data-valmsg-for", `BillDetails[${i}].${fieldName}`);
+                                    }
+                                }
+                            }
+                        </script>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index_BILL")
+                </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+

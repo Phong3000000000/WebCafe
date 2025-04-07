@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Details_User";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model DOAN_CLOUND.Models.KhachHang
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="form-horizontal" style="width:25%; margin:20px auto; padding:10px; box-shadow:1px 1px 2px 2px #888888; border-radius:10px">
+                <h4>Thông Tin User </h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>Họ tên</dt>
+                    <dd>@Model.HOTEN</dd>
+
+                    <dt>Chức vụ</dt>
+                    <dd>@Model.CHUCVU</dd>
+
+                    <dt>Mã người quản lý</dt>
+                    <dd>@Model.MANV_QUANLY</dd>
+
+                    <dt>Ngày sinh</dt>
+                    <dd>@Model.NGAYSINH</dd>
+
+                    <dt>Giới tính</dt>
+                    <dd>@Model.GIOITINH</dd>
+
+                    <dt>CMND</dt>
+                    <dd>@Model.CMND</dd>
+
+                    <dt>Email</dt>
+                    <dd>@Model.EMAIL</dd>
+
+                    <dt>Role</dt>
+                    <dd>@Model.ROLE</dd>
+
+                    <dt>Adress</dt>
+                    <dd>@Model.DIACHI</dd>
+
+                    <dt>Phone</dt>
+                    <dd>@Model.SODT</dd>
+                    <p>
+                        @Html.ActionLink("Back to List", "Index_User", "", new { @class = "btn btn-info" })
+                    </p>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

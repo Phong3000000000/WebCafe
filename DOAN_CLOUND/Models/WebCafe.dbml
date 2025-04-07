@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WEB_CAFE" Class="WebCafeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.USERS" Member="USERs">
+    <Type Name="USER">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HOTEN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CHUCVU" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MANV_QUANLY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYSINH" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="GIOITINH" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CMND" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ROLE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SODT" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="USERNAME" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="USER_USER" Member="USERs" ThisKey="ID" OtherKey="MANV_QUANLY" Type="USER" />
+      <Association Name="USER_ORDER" Member="ORDERs" ThisKey="ID" OtherKey="MAKH" Type="ORDER" />
+      <Association Name="USER_USER" Member="USER1" ThisKey="MANV_QUANLY" OtherKey="ID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCTS" Member="PRODUCTs">
+    <Type Name="PRODUCT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENHANG" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DVT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CATE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HINHANH" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="GIA" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="PRODUCT_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="ID" OtherKey="MASP" Type="ORDER_DETAIL" />
+      <Association Name="CATEGORy_PRODUCT" Member="CATEGORy" ThisKey="CATE_ID" OtherKey="ID" Type="CATEGORy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDERS" Member="ORDERs">
+    <Type Name="ORDER">
+      <Column Name="MAHOADON" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MAKH" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NGAYLAP" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TONGGIA" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER_DETAILs" ThisKey="MAHOADON" OtherKey="MAHOADON" Type="ORDER_DETAIL" />
+      <Association Name="USER_ORDER" Member="USER" ThisKey="MAKH" OtherKey="ID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDER_DETAILS" Member="ORDER_DETAILs">
+    <Type Name="ORDER_DETAIL">
+      <Column Name="MAHOADON" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MASP" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SOLUONG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GIA" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="ORDER_ORDER_DETAIL" Member="ORDER" ThisKey="MAHOADON" OtherKey="MAHOADON" Type="ORDER" IsForeignKey="true" />
+      <Association Name="PRODUCT_ORDER_DETAIL" Member="PRODUCT" ThisKey="MASP" OtherKey="ID" Type="PRODUCT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CATEGORIES" Member="CATEGORies">
+    <Type Name="CATEGORy">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="CATEGORy_PRODUCT" Member="PRODUCTs" ThisKey="ID" OtherKey="CATE_ID" Type="PRODUCT" />
+    </Type>
+  </Table>
+</Database>

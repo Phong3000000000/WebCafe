@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DOAN_CLOUND.Models.PRODUCT>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Search</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create_Product", "Product")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENHANG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DVT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATE_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HINHANH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENHANG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DVT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATE_ID)
+        </td>
+        <td style="vertical-align: middle">
+            <div style="background-image: url('@Html.DisplayFor(modelItem => item.HINHANH)');
+                width: 100px;
+                background-position: center;
+                height: 100px;
+                background-size: cover;
+                background-repeat: no-repeat;">
+            </div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GIA)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Update_Product", "Product", new { id = item.ID }, null) |
+            @Html.ActionLink("Delete", "Delete_Product", "Product", new { id = item.ID }, null)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@model DOAN_CLOUND.Models.Products
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="form-horizontal" style="width:30%; margin:20px auto; padding:10px; box-shadow:1px 1px 2px 2px #888888; border-radius:10px">
+                <h4>Bạn có chắc chắn muốn xóa khách hàng này?</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-6">Id</dt>
+                    <dd class="col-sm-6">@Model.tenhang</dd>
+
+                    <dt class="col-sm-6">Tên món</dt>
+                    <dd class="col-sm-6">@Model.dvt</dd>
+
+
+                    <dt class="col-sm-6">Tên món</dt>
+                    <dd class="col-sm-6">@Model.cate_id</dd>
+                </dl>
+
+                @*<form asp-action="Delete1" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <input type="submit" value="Xóa" class="btn btn-danger" />
+                            <a asp-action="Index_Category" href="~/Home/Index_Category" class="btn btn-secondary">Hủy bỏ</a>
+                        </div>
+                    </form>*@
+                @using (Html.BeginForm("DeleteConfirmed_Products", "Home", new { id = Model.Id }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default" /> |
+                        @Html.ActionLink("Back to List", "Index_Products")
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

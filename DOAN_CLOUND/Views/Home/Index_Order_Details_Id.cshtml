@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index_Order_Details_Id";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Index_Order_Details_Id</h2>
+
+@model IEnumerable<DOAN_CLOUND.Models.ORDER_DETAIL>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create_Order_Detail", "Order_Detail")
+
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MAHOADON)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MASP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOLUONG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIA)
+        </th>
+        <th>TINHNANG</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MAHOADON)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MASP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Update_Order_Detail", "Order_Detail", new { mahoadon = item.MAHOADON, masp = item.MASP }, null)|
+                @Html.ActionLink("Details", "Details", "Order_Detail", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete_Order_Detail", "Order_Detail", new { mahoadon = item.MAHOADON, masp = item.MASP }, null)
+            </td>
+        </tr>
+    }
+
+</table>
